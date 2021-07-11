@@ -40,6 +40,8 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.11"
+    "@types/styled-components": "^5.1.11",
+    "eslint": "^7.20.0",
+    "eslint-plugin-react": "^7.22.0"
   }
 }
