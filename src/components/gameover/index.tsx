@@ -1,6 +1,5 @@
 import React from "react";
 import styled from 'styled-components';
-import Player from '../player';
 
 const Div = styled.div`
     position: fixed;

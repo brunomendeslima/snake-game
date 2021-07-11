@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import "../../App.css"
 import Fruit from '../fruit'
 import OldMonitor from '../oldmonitor'
