@@ -113,9 +113,9 @@ const Map = () => {
 
 	return (
 		<div onKeyDown={(e) => changeDirection(e)}>
-			<Fruit/>
 			<OldMonitor/>
 			<Snake canvasRef={canvasRef} canvasX={canvasX} canvasY={canvasY} />
+			<Fruit/>
 			<GameOver gameOver={gameOver} />
 			<Player gameOver={gameOver} score={score} />
 			
