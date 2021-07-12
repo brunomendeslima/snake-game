@@ -20,6 +20,7 @@ const Map = () => {
 	const [ snake, setSnake ] = useState(initialSnake)
 	const [ apple, setApple ] = useState(initialApple)
 	const [ direction, setDirection ] = useState([ 0, -1 ])
+	const [ eixoDirection, setEixoDirection] = useState('')
 	const [ delay, setDelay ] = useState<number | null>(null)
 	const [ gameOver, setGameOver ] = useState(false)
 	const [ score, setScore ] = useState(0)
@@ -98,16 +99,32 @@ const Map = () => {
 	const changeDirection = (e: React.KeyboardEvent<HTMLDivElement>) => {
 		switch (e.key) {
 			case "ArrowLeft":
+				if(eixoDirection === 'x')
+					break;
+
 				setDirection([ -1, 0 ])
+				setEixoDirection("x")
 				break
 			case "ArrowUp":
+				if(eixoDirection === 'y')
+					break;
+
 				setDirection([ 0, -1 ])
+				setEixoDirection("y")
 				break
 			case "ArrowRight":
+				if(eixoDirection === 'x')
+					break;
+
 				setDirection([ 1, 0 ])
+				setEixoDirection("x")
 				break
 			case "ArrowDown":
+				if(eixoDirection === 'y')
+					break;
+					
 				setDirection([ 0, 1 ])
+				setEixoDirection("y")
 				break
 		}
 	}
