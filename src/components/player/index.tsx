@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from "styled-components"
 
 const Div = styled.div`
     position: fixed;
@@ -15,7 +15,7 @@ interface PropsType {
     score: number;    
 }
  
-const Player:  React.FC<PropsType> = (props) => {
+const Player:  React.FC<PropsType> = (props: PropsType) => {
     const [value, setValue] = React.useState('Player');
     
     const onChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {

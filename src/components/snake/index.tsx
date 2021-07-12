@@ -1,5 +1,5 @@
-import React from "react";
-import styled from 'styled-components';
+import React from 'react';
+import styled from "styled-components";
 
 const Canvas = styled.canvas`
     border: 5px solid transparent;
@@ -17,7 +17,7 @@ interface PropsType {
     canvasY: number
 }
 
-const Snake: React.FC<PropsType> = (props) => {
+const Snake: React.FC<PropsType> = (props: PropsType) => {
         
     return <Canvas ref={props.canvasRef} width={`${props.canvasX}px`} height={`${props.canvasY}px`} />
 }
