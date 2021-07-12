@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from 'react'
 import "../../App.css"
 import Fruit from '../fruit'
 import OldMonitor from '../oldmonitor'
@@ -6,6 +6,7 @@ import useInterval from "./useInterval"
 import GameOver from "../gameover";
 import Snake from "../snake"
 import Player from "../player"
+import useScores from '../../hooks/useScores'
 
 const canvasX = 1000
 const canvasY = 1000
@@ -111,6 +112,12 @@ const Map = () => {
 		}
 	}
 
+	const {scores} = useScores()
+
+	const scoreItem = (score: any) => {
+		return <h2>{score.name}: {score.points}</h2>
+	}
+
 	return (
 		<div onKeyDown={(e) => changeDirection(e)}>
 			<OldMonitor/>
@@ -122,10 +129,15 @@ const Map = () => {
 			<button onClick={play} className="playButton">
 				Play
 			</button>
-			<div className="scoreBox">
-				<h2>Score: {score}</h2>
-				<h2>High Score: {localStorage.getItem("snakeScore")}</h2>
-				<h2>player: {localStorage.getItem("playerName")}</h2>
+			<div className="scoreBoxes">
+				<div className="scoreBox">
+					<h2>Score: {score}</h2>
+					<h2>High Score: {localStorage.getItem("snakeScore")}</h2>
+				</div>
+				<div className="scoreBox">
+					<h2>Ranking</h2>
+					{scores.map(score => scoreItem(score))}
+				</div>
 			</div>
 		</div>
 	)

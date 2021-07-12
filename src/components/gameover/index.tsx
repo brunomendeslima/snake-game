@@ -1,5 +1,5 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Div = styled.div`
     position: fixed;
@@ -14,7 +14,7 @@ interface PropsType {
     gameOver: boolean;    
 }
 
-const GameOver: React.FC<PropsType> = (props) => {    
+const GameOver: React.FC<PropsType> = (props: PropsType) => {    
     
     if (props.gameOver) 
         return <Div className="gameOver">Game Over</Div>
