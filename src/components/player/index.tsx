@@ -2,12 +2,21 @@ import React from 'react'
 import styled from "styled-components"
 
 const Div = styled.div`
+    display: flex;
+    flex-direction: column;
     position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	color: white;
-	font-size: 10px;
+    padding-top: 2em;
+`;
+
+const Input = styled.input`
+    font-family: 'Press Start 2P', cursive;
+    width: 40%;
+    align-self: center;
+    font-size: 20px;    
 `;
 
 interface PropsType {
@@ -23,11 +32,11 @@ const Player:  React.FC<PropsType> = (props: PropsType) => {
         setValue(event.target.value);
     };    
 
-    if ((props.gameOver) && (props.score > Number(localStorage.getItem("snakeScore"))))
+    if (props.gameOver)
         return (
             <Div>
-                <h2>Player! Put your name!</h2> 
-                <input value={value} type="text" onChange={onChange} />      
+                <h3>Player! Put your name!</h3> 
+                <Input value={value} type="text" onChange={onChange} />      
             </Div>
         );
     
