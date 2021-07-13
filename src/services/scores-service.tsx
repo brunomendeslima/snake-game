@@ -19,9 +19,7 @@ const ScoresService = {
   },
 
   async insertScore(score: any) {
-    db.collection("scores").add({
-      score,
-    });
+    db.collection("scores").add(score);
   },
 };
 
