@@ -5,7 +5,7 @@ import { db } from "../firebase";
 const useScores = () => {
   const [scores, setScores] = useState([]);
   const [scoresCollection, loadingScores, error] = useCollection(
-    db.collection("scores").orderBy("points", "asc").limit(10)
+    db.collection("scores").orderBy("points", "desc").limit(10)
   );
 
   useEffect(() => {
@@ -13,8 +13,7 @@ const useScores = () => {
         .map((doc: any) => ({
           ...doc.data(),
           key: doc,
-        }))
-        .reverse() || [] as any;
+        })) || [] as any;
 
     setScores(newScores);
   }, [scoresCollection]);
