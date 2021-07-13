@@ -149,7 +149,6 @@ const Map = () => {
 			<div className="scoreBoxes">
 				<div className="scoreBox">
 					<h2>Score: {score}</h2>
-					<h2>High Score: {localStorage.getItem("snakeScore")}</h2>
 				</div>
 				<div className="scoreBox">
 					<h2>Ranking</h2>
