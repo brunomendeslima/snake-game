@@ -8,6 +8,7 @@ import Snake from "../snake"
 import Player from "../player"
 import useScores from '../../hooks/useScores'
 import ScoreBox from '../score/Box'
+import PlayButton from '../play/PlayButton'
 
 const canvasX = 1000
 const canvasY = 1000
@@ -133,7 +134,6 @@ const Map = () => {
 	const { scores } = useScores();
 	const footerText = `Score: ${score}`
 
-
 	return (
 		<div onKeyDown={(e) => changeDirection(e)}>
 			<OldMonitor />
@@ -141,10 +141,9 @@ const Map = () => {
 			<Fruit />
 			<GameOver gameOver={gameOver} />
 			<Player gameOver={gameOver} score={score} />
-
-			<button onClick={play} className="playButton">
+			<PlayButton onClick={play}>
 				Play
-			</button>
+			</PlayButton>
 			<ScoreBox title="Ranking" itens={scores} footerText={footerText} />
 		</div>
 	)
