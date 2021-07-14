@@ -9,9 +9,13 @@ const Box = styled.div`
     flex-direction: column;
     padding: 1em;
     min-width: 220px;
-    width: 90%;
+    max-width: 280px;
     box-shadow: 0px 4px 13px 0px rgba(48, 26, 74, 0.63);
     -webkit-box-shadow: 0px 4px 13px 0px rgba(48, 26, 74, 0.63);
+    float: right;
+    position: relative;
+    top: 12em;
+    right: 2em;
 `;
 
 interface Props {
