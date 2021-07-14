@@ -7,24 +7,25 @@ import GameOver from "../gameover";
 import Snake from "../snake"
 import Player from "../player"
 import useScores from '../../hooks/useScores'
+import ScoreBox from '../score/Box'
 
 const canvasX = 1000
 const canvasY = 1000
-const initialSnake = [ [ 4, 10 ], [ 4, 10 ] ]
-const initialApple = [ 14, 10 ]
+const initialSnake = [[4, 10], [4, 10]]
+const initialApple = [14, 10]
 const scale = 50
 const timeDelay = 100
 
 const Map = () => {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
-	const [ snake, setSnake ] = useState(initialSnake)
-	const [ apple, setApple ] = useState(initialApple)
-	const [ direction, setDirection ] = useState([ 0, -1 ])
-	const [ eixoDirection, setEixoDirection] = useState('')
-	const [ delay, setDelay ] = useState<number | null>(null)
-	const [ gameOver, setGameOver ] = useState(false)
-	const [ score, setScore ] = useState(0)
-	
+	const [snake, setSnake] = useState(initialSnake)
+	const [apple, setApple] = useState(initialApple)
+	const [direction, setDirection] = useState([0, -1])
+	const [eixoDirection, setEixoDirection] = useState('')
+	const [delay, setDelay] = useState<number | null>(null)
+	const [gameOver, setGameOver] = useState(false)
+	const [score, setScore] = useState(0)
+
 	useInterval(() => runGame(), delay)
 
 	useEffect(
@@ -37,24 +38,24 @@ const Map = () => {
 					ctx.setTransform(scale, 0, 0, scale, 0, 0)
 					ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
 					ctx.fillStyle = "#a3d001"
-					snake.forEach(([ x, y ]) => ctx.fillRect(x, y, 1, 1))
+					snake.forEach(([x, y]) => ctx.fillRect(x, y, 1, 1))
 					ctx.drawImage(fruit, apple[0], apple[1], 1, 1)
 				}
 			}
 		},
-		[ snake, apple, gameOver ]
+		[snake, apple, gameOver]
 	)
 
 	const handleSetScore = () => {
 		if (score > Number(localStorage.getItem("snakeScore"))) {
-			localStorage.setItem("snakeScore", JSON.stringify(score))			
+			localStorage.setItem("snakeScore", JSON.stringify(score))
 		}
 	}
 
 	const play = () => {
 		setSnake(initialSnake)
 		setApple(initialApple)
-		setDirection([ 1, 0 ])
+		setDirection([1, 0])
 		setDelay(timeDelay)
 		setScore(0)
 		setGameOver(false)
@@ -82,8 +83,8 @@ const Map = () => {
 	}
 
 	const runGame = () => {
-		const newSnake = [ ...snake ]
-		const newSnakeHead = [ newSnake[0][0] + direction[0], newSnake[0][1] + direction[1] ]
+		const newSnake = [...snake]
+		const newSnakeHead = [newSnake[0][0] + direction[0], newSnake[0][1] + direction[1]]
 		newSnake.unshift(newSnakeHead)
 		if (checkCollision(newSnakeHead)) {
 			setDelay(null)
@@ -99,62 +100,52 @@ const Map = () => {
 	const changeDirection = (e: React.KeyboardEvent<HTMLDivElement>) => {
 		switch (e.key) {
 			case "ArrowLeft":
-				if(eixoDirection === 'x')
+				if (eixoDirection === 'x')
 					break;
 
-				setDirection([ -1, 0 ])
+				setDirection([-1, 0])
 				setEixoDirection("x")
 				break
 			case "ArrowUp":
-				if(eixoDirection === 'y')
+				if (eixoDirection === 'y')
 					break;
 
-				setDirection([ 0, -1 ])
+				setDirection([0, -1])
 				setEixoDirection("y")
 				break
 			case "ArrowRight":
-				if(eixoDirection === 'x')
+				if (eixoDirection === 'x')
 					break;
 
-				setDirection([ 1, 0 ])
+				setDirection([1, 0])
 				setEixoDirection("x")
 				break
 			case "ArrowDown":
-				if(eixoDirection === 'y')
+				if (eixoDirection === 'y')
 					break;
-					
-				setDirection([ 0, 1 ])
+
+				setDirection([0, 1])
 				setEixoDirection("y")
 				break
 		}
 	}
 
-	const {scores} = useScores()
+	const { scores } = useScores();
+	const footerText = `Score: ${score}`
 
-	const scoreItem = (score: any) => {
-		return <h2>{score.name}: {score.points}</h2>
-	}
 
 	return (
 		<div onKeyDown={(e) => changeDirection(e)}>
-			<OldMonitor/>
+			<OldMonitor />
 			<Snake canvasRef={canvasRef} canvasX={canvasX} canvasY={canvasY} />
-			<Fruit/>
+			<Fruit />
 			<GameOver gameOver={gameOver} />
 			<Player gameOver={gameOver} score={score} />
-			
+
 			<button onClick={play} className="playButton">
 				Play
 			</button>
-			<div className="scoreBoxes">
-				<div className="scoreBox">
-					<h2>Score: {score}</h2>
-				</div>
-				<div className="scoreBox">
-					<h2>Ranking</h2>
-					{scores.map(score => scoreItem(score))}
-				</div>
-			</div>
+			<ScoreBox title="Ranking" itens={scores} footerText={footerText} />
 		</div>
 	)
 }
