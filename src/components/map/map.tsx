@@ -9,7 +9,7 @@ import Player from "../player/Player"
 import useScores from '../../hooks/useScores'
 import ScoreBox from '../score/Box'
 import PlayButton from '../play/PlayButton'
-
+import { useGame } from '../../providers/game'
 
 const canvasX = 1000
 const canvasY = 1000
@@ -19,14 +19,14 @@ const scale = 50
 const timeDelay = 130
 
 const Map = () => {
-	
+
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const [snake, setSnake] = useState(initialSnake)
 	const [apple, setApple] = useState(initialApple)
 	const [direction, setDirection] = useState([0, -1])
 	const [eixoDirection, setEixoDirection] = useState('')
 	const [delay, setDelay] = useState<number | null>(null)
-	const [gameOver, setGameOver] = useState(false)
+	const { gameOver, setGameOver } = useGame();
 	const [score, setScore] = useState(0)
 
 	useInterval(() => runGame(), delay)
@@ -144,13 +144,13 @@ const Map = () => {
 					<Snake canvasRef={canvasRef} canvasX={canvasX} canvasY={canvasY} />
 					<Fruit />
 				</>
-			):(
+			) : (
 				<>
-				<GameOver />
-				<Player score={score} />				
-				</>	
+					<GameOver />
+					<Player score={score} />
+				</>
 			)}
-			<PlayButton onClick={play} />				
+			<PlayButton onClick={play} />
 			<ScoreBox title="Ranking" itens={scores} footerText={footerText} />
 		</div>
 	)
