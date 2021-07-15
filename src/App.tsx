@@ -1,10 +1,13 @@
 import React from 'react'
 import Map from './components/map'
+import GameProvider from './providers/game'
 
 function App() {
 		
 	return (
-		<Map />		
+		<GameProvider>
+			<Map />
+		</GameProvider>
 	)
 }
 

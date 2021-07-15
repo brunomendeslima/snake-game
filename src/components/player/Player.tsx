@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from "styled-components"
 import Diskette from "../../assets/diskette.png"
+import { useGame } from '../../providers/game';
 import ScoresService from '../../services/scores-service';
 
 const Div = styled.div`
@@ -26,7 +27,7 @@ const Input = styled.input`
     width: 40%;
     font-size: 20px;    
 `;
-    
+
 const Img = styled.img`
     width: 40px;
     height: 40px;
@@ -37,33 +38,35 @@ const Spacer = styled.div`
 `;
 
 interface PropsType {
-    score: number;    
+    score: number;
 }
- 
-const Player:  React.FC<PropsType> = (props: PropsType) => {
+
+const Player: React.FC<PropsType> = (props: PropsType) => {
     const [value, setValue] = React.useState('Player');
-    
+    const { setGameOver } = useGame();
+
     const onChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        localStorage.setItem('playerName', JSON.stringify(event.target.value)); 
+        localStorage.setItem('playerName', JSON.stringify(event.target.value));
         setValue(event.target.value);
     };
 
     const onSaveClick = () => {
-        let newScore = {name: value, points: props.score};
+        let newScore = { name: value, points: props.score };
         ScoresService.insertScore(newScore);
+        setGameOver(false);
     };
-    
+
     return (
         <Div>
-            <h3>Player! Put your name!</h3> 
+            <h3>Player! Put your name!</h3>
             <DivImage>
                 <Input value={value} type="text" onChange={onChange} />
                 <Spacer />
-                <Img src={Diskette} onClick={onSaveClick}/>
+                <Img src={Diskette} onClick={onSaveClick} />
             </DivImage>
         </Div>
-    ); 
-        
+    );
+
 };
- 
+
 export default Player;
