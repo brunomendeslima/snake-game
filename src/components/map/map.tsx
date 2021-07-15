@@ -16,7 +16,7 @@ const canvasY = 1000
 const initialSnake = [[4, 10], [4, 10]]
 const initialApple = [14, 10]
 const scale = 50
-const timeDelay = 130
+let timeDelay = 150
 
 const Map = () => {
 
@@ -28,7 +28,7 @@ const Map = () => {
 	const [delay, setDelay] = useState<number | null>(null)
 	const { gameOver, setGameOver } = useGame();
 	const [score, setScore] = useState(0)
-
+	
 	useInterval(() => runGame(), delay)
 
 	useEffect(
@@ -44,9 +44,21 @@ const Map = () => {
 					snake.forEach(([x, y]) => ctx.fillRect(x, y, 1, 1))
 					ctx.drawImage(fruit, apple[0], apple[1], 1, 1)
 				}
-			}
+			}			
+
 		},
 		[snake, apple, gameOver]
+	)
+
+	useEffect(
+		() => {
+			if((score > 0) && (score % 5 === 0)){
+				timeDelay = timeDelay - 10
+				setDelay(timeDelay)
+			}
+			console.log(timeDelay)
+		},
+		[score]
 	)
 
 	const handleSetScore = () => {
@@ -59,6 +71,7 @@ const Map = () => {
 		setSnake(initialSnake)
 		setApple(initialApple)
 		setDirection([1, 0])
+		timeDelay = 150
 		setDelay(timeDelay)
 		setScore(0)
 		setGameOver(false)
@@ -97,7 +110,7 @@ const Map = () => {
 		if (!appleAte(newSnake)) {
 			newSnake.pop()
 		}
-		setSnake(newSnake)
+		setSnake(newSnake)	
 	}
 
 	const changeDirection = (e: React.KeyboardEvent<HTMLDivElement>) => {
