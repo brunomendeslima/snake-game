@@ -15,6 +15,7 @@
         "react"
     ],    
     "rules": {
-        "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx", ".tsx"] }]        
+        "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
+        "react/prop-types": "off"       
     }
 }
