@@ -5,19 +5,21 @@ import OldMonitor from '../oldmonitor'
 import useInterval from "./useInterval"
 import GameOver from "../gameover";
 import Snake from "../snake"
-import Player from "../player"
+import Player from "../player/Player"
 import useScores from '../../hooks/useScores'
 import ScoreBox from '../score/Box'
 import PlayButton from '../play/PlayButton'
+
 
 const canvasX = 1000
 const canvasY = 1000
 const initialSnake = [[4, 10], [4, 10]]
 const initialApple = [14, 10]
 const scale = 50
-const timeDelay = 100
+const timeDelay = 130
 
 const Map = () => {
+	
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const [snake, setSnake] = useState(initialSnake)
 	const [apple, setApple] = useState(initialApple)
@@ -137,13 +139,18 @@ const Map = () => {
 	return (
 		<div onKeyDown={(e) => changeDirection(e)}>
 			<OldMonitor />
-			<Snake canvasRef={canvasRef} canvasX={canvasX} canvasY={canvasY} />
-			<Fruit />
-			<GameOver gameOver={gameOver} />
-			<Player gameOver={gameOver} score={score} />
-			<PlayButton onClick={play}>
-				Play
-			</PlayButton>
+			{!gameOver ? (
+				<>
+					<Snake canvasRef={canvasRef} canvasX={canvasX} canvasY={canvasY} />
+					<Fruit />
+				</>
+			):(
+				<>
+				<GameOver />
+				<Player score={score} />				
+				</>	
+			)}
+			<PlayButton onClick={play} />				
 			<ScoreBox title="Ranking" itens={scores} footerText={footerText} />
 		</div>
 	)

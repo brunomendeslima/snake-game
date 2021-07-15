@@ -10,16 +10,8 @@ const Div = styled.div`
 	font-size: 35px;
 `;
 
-interface PropsType {
-    gameOver: boolean;    
-}
-
-const GameOver: React.FC<PropsType> = (props: PropsType) => {    
-    
-    if (props.gameOver) 
-        return <Div className="gameOver">Game Over</Div>
-                   
-    return <></>
+const GameOver: React.FC = () => {           
+    return <Div>Game Over</Div>    
 }
 
 export default GameOver;
