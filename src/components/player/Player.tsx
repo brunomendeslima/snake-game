@@ -25,7 +25,7 @@ const Input = styled.input`
     font-family: 'Press Start 2P', cursive;
     width: 40%;
     font-size: 20px;    
-    `;
+`;
     
 const Img = styled.img`
     width: 40px;
@@ -37,7 +37,6 @@ const Spacer = styled.div`
 `;
 
 interface PropsType {
-    gameOver: boolean;
     score: number;    
 }
  
@@ -53,21 +52,18 @@ const Player:  React.FC<PropsType> = (props: PropsType) => {
         let newScore = {name: value, points: props.score};
         ScoresService.insertScore(newScore);
     };
-
-    if (props.gameOver)
-        return (
-            <Div>
-                <h3>Player! Put your name!</h3> 
-                <DivImage>
-                    <Input value={value} type="text" onChange={onChange} />
-                    <Spacer />
-                    <Img src={Diskette} onClick={onSaveClick}/>
-                </DivImage>
-            </Div>
-        );
     
-    
-    return <></>
+    return (
+        <Div>
+            <h3>Player! Put your name!</h3> 
+            <DivImage>
+                <Input value={value} type="text" onChange={onChange} />
+                <Spacer />
+                <Img src={Diskette} onClick={onSaveClick}/>
+            </DivImage>
+        </Div>
+    ); 
+        
 };
  
 export default Player;

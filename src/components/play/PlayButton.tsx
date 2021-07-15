@@ -25,7 +25,7 @@ interface Props {
 
 const PlayButton: React.FC<Props> = (props: Props) => {
     return (
-        <Button onClick={props.onClick} className="playButton">
+        <Button onClick={props.onClick}>
             Play
         </Button>
     )
