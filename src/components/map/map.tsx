@@ -61,12 +61,6 @@ const Map = () => {
 		[score]
 	)
 
-	const handleSetScore = () => {
-		if (score > Number(localStorage.getItem("snakeScore"))) {
-			localStorage.setItem("snakeScore", JSON.stringify(score))
-		}
-	}
-
 	const play = () => {
 		setSnake(initialSnake)
 		setApple(initialApple)
@@ -104,8 +98,7 @@ const Map = () => {
 		newSnake.unshift(newSnakeHead)
 		if (checkCollision(newSnakeHead)) {
 			setDelay(null)
-			setGameOver(true)
-			handleSetScore()
+			setGameOver(true)			
 		}
 		if (!appleAte(newSnake)) {
 			newSnake.pop()

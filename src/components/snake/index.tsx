@@ -6,7 +6,7 @@ const Canvas = styled.canvas`
 	width: 585px;
 	height: 440px;
 	position: fixed;
-	top: 43.2%;
+	top: 41.8%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 `;

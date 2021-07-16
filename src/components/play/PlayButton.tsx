@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Button = styled.button`
     position: fixed;
-	top: 80%;
+	top: 88%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	color: white;

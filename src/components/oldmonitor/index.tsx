@@ -14,7 +14,7 @@ const Img = styled.img`
 const OldMonitor: React.FC = (props) => {         
         
     return (        
-        <Img src={Monitor} alt="fruit" width="4000" className="monitor" />     
+        <Img src={Monitor} alt="fruit" />     
     )
         
 }

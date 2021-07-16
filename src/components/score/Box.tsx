@@ -14,7 +14,7 @@ const Box = styled.div`
     -webkit-box-shadow: 0px 4px 13px 0px rgba(48, 26, 74, 0.63);
     float: right;
     position: relative;
-    top: 12em;
+    top: 3em;
     right: 2em;
 `;
 

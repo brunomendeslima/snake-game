@@ -46,7 +46,6 @@ const Player: React.FC<PropsType> = (props: PropsType) => {
     const { setGameOver } = useGame();
 
     const onChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        localStorage.setItem('playerName', JSON.stringify(event.target.value));
         setValue(event.target.value);
     };
 
