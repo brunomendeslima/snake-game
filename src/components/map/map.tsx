@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import "../../App.css"
 import Fruit from '../fruit'
 import OldMonitor from '../oldmonitor'
-import useInterval from "./useInterval"
+import useInterval from "../../hooks/useInterval"
 import GameOver from "../gameover";
 import Snake from "../snake"
 import Player from "../player/Player"
@@ -10,6 +10,7 @@ import useScores from '../../hooks/useScores'
 import ScoreBox from '../score/Box'
 import PlayButton from '../play/PlayButton'
 import { useGame } from '../../providers/game'
+import useSpeed from '../../hooks/useSpeed'
 
 const canvasX = 1000
 const canvasY = 1000
@@ -24,12 +25,12 @@ const Map = () => {
 	const [snake, setSnake] = useState(initialSnake)
 	const [apple, setApple] = useState(initialApple)
 	const [direction, setDirection] = useState([0, -1])
-	const [eixoDirection, setEixoDirection] = useState('')
-	const [delay, setDelay] = useState<number | null>(null)
-	const { gameOver, setGameOver } = useGame();
-	const [score, setScore] = useState(0)
-	
+	const [eixoDirection, setEixoDirection] = useState('')	
+	const {	gameOver, setGameOver, score, setScore, delay, setDelay } = useGame();
+		
 	useInterval(() => runGame(), delay)
+
+	useSpeed()
 
 	useEffect(
 		() => {
@@ -48,18 +49,7 @@ const Map = () => {
 
 		},
 		[snake, apple, gameOver]
-	)
-
-	useEffect(
-		() => {
-			if((score > 0) && (score % 5 === 0)){
-				timeDelay = timeDelay - 10
-				setDelay(timeDelay)
-			}
-			console.log(timeDelay)
-		},
-		[score]
-	)
+	)	
 
 	const play = () => {
 		setSnake(initialSnake)
